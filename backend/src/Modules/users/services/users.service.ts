@@ -185,22 +185,20 @@ export class UsersService
 
     await this._processData._updateDB(this.UsersModel, args).then( async (r: responseInterface) => {
 
-      const l: sessionDTO = 
+      const userData: sessionDTO = 
       {
           _id: r.data._id,
           name: r.data.name,
           last_name: r.data.last_name,
           dir_domicilio: r.data.dir_domicilio,
           email: r.data.email,
-          rol: r.data.rol.alias,
-          rolName: r.data.rol.rol,
           token: null,
           createdAt: r.data.createdAt,
           updatedAt: r.data.updatedAt
         }
 
       this._Response = r;
-      this._Response.data = l;
+      this._Response.data = userData;
       this._Response.message = 'Información actualizada';
 
 

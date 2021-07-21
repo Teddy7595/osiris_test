@@ -46,8 +46,6 @@ export class updateUserDto {
   @IsNotEmpty()
   pass: string;
 
-  @IsArray()
-  @IsNotEmpty()
   updatedAt: string[];
 
 }
