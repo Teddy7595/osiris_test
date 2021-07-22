@@ -8,7 +8,8 @@ import { ScheduleModule } from '@nestjs/schedule';
 // MODULOS DE RUTAS
 import {
   UsersModule,
-  AuthModule
+  AuthModule,
+  ProductsModule
 
 } from "./Modules/Routes.module.index";
 
@@ -27,8 +28,8 @@ import { _MONGOOSEMODULE } from "./Database/mongo-config";
     ConfigModule,
     AuthModule,
     MiddlewareModule,
-    UsersModule
-
+    UsersModule,
+    ProductsModule
   ],
   controllers: [],
   providers: [ ],

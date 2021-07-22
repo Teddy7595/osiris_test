@@ -1,0 +1,1 @@
+export {ProdcutDto, updateProductDto} from './product.dto'

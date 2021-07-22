@@ -10,4 +10,4 @@ import { _USERSCHEMA } from './schemas.index';
   providers: [],
   exports: [_USERSCHEMA],
 })
-export class UsersModelsModule {}
+export class UsersModelsModule {} 

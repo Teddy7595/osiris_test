@@ -35,6 +35,9 @@ export class UsersController {
 
   constructor(private _userService: UsersService) {}
 
+  @Get("hello")
+  async hello(){ return "hello this is route users by teddy" }
+
   //@UseGuards(AuthGuard('jwt'))
   @Get("/get/:id")
   async getOneUser( @Param("id") id: string, @Response() res: any ): Promise<responseInterface>

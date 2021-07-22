@@ -12,37 +12,34 @@ import { DateProcessService } from "src/Classes/classes.index";
 
 const _dateService = new DateProcessService();
 
-
 // @Schema()
 export class _files extends Document {
 
-  @Prop({
-    required: true,
-    default: null,
-  })
-  type: string;
-  @Prop({
-    required: true,
-    default: null,
-  })
-  file: string;
-  @Prop({
-    required: true,
-    default: null,
-  })
-  format: string;
-  @Prop({
-    required: true,
-    default: null,
-  })
-  folder: string;
-
+    @Prop({
+      required: true,
+      default: null,
+    })
+    type: string;
+    @Prop({
+      required: true,
+      default: null,
+    })
+    file: string;
+    @Prop({
+      required: true,
+      default: null,
+    })
+    format: string;
+    @Prop({
+      required: true,
+      default: null,
+    })
+    folder: string;
+  
 }
 
-
-
 @Schema()
-export class Users extends Document {
+export class Products extends Document {
 
   @Prop({
     type: _files,
@@ -91,7 +88,7 @@ export class Users extends Document {
   updatedAt: string;
 }
 
-export const UsersSchema = SchemaFactory.createForClass(Users)
+export const ProductsSchema = SchemaFactory.createForClass(Products)
   .plugin(uniqueValidator, {
     message: "El {PATH} {VALUE} ya está registrado en sistema",
   })
@@ -99,5 +96,3 @@ export const UsersSchema = SchemaFactory.createForClass(Users)
 .plugin(aggregatePaginate)
 .plugin(castAggregation)
 .plugin(mongoose_delete, { overrideMethods: 'all' });
-
-
