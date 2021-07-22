@@ -49,7 +49,7 @@ export class Products extends Document {
 
   @Prop({
     required: true,
-    default: null,
+    default: null
   })
   name: string;
 
@@ -57,22 +57,13 @@ export class Products extends Document {
     required: true,
     default: null,
   })
-  last_name: string;
+  price: number;
 
   @Prop({
     required: true,
     default: null,
   })
-  dir_domicilio: string;
-
-  @Prop({
-    required: true,
-    unique: true
-  })
-  email: string;
-
-  @Prop({required: true})
-  pass: string;
+  stock: number;
 
   @Prop({
     type:   Array,
@@ -95,4 +86,4 @@ export const ProductsSchema = SchemaFactory.createForClass(Products)
 .plugin(mongoosePaginate)
 .plugin(aggregatePaginate)
 .plugin(castAggregation)
-.plugin(mongoose_delete, { overrideMethods: 'all' });
+.plugin(mongoose_delete, { overrideMethods: 'all'});

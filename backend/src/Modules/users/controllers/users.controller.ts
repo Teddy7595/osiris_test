@@ -39,7 +39,7 @@ export class UsersController {
   async hello(){ return "hello this is route users by teddy" }
 
   //@UseGuards(AuthGuard('jwt'))
-  @Get("/get/:id")
+  @Get(":id")
   async getOneUser( @Param("id") id: string, @Response() res: any ): Promise<responseInterface>
   {
     this._Response = await this._userService.getOne(id);

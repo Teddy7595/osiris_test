@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import {ProductsController} from './controllers/controllers.index'
 
 //servicios
-import {ProductsService} from './services/index.services'
+import {ProductsService, PurchaseService} from './services/index.services'
 
 //esquemas
 import {ProductsModelsModule} from './models/productsModels.module' 
@@ -11,7 +11,7 @@ import {ProductsModelsModule} from './models/productsModels.module'
 @Module({
     imports:[ProductsModelsModule],
     controllers:[ProductsController],
-    providers:[ProductsService],
-    exports:[ProductsService]
+    providers:[ProductsService, PurchaseService],
+    exports:[ProductsService, PurchaseService]
 })
 export class ProductsModule {}

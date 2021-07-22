@@ -1,1 +1,1 @@
-export {ProdcutDto, updateProductDto} from './product.dto'
+export {ProductDto, UpdateProductDto} from './product.dto'

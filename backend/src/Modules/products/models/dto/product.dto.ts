@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, IsArray, IsNumber } from "class-validator";
 
-export class ProdcutDto {
+export class ProductDto {
 
     @IsString()
     @IsNotEmpty()
@@ -17,7 +17,7 @@ export class ProdcutDto {
     photo: object;
 }
 
-export class updateProductDto {
+export class UpdateProductDto {
 
     @IsString()
     @IsNotEmpty()

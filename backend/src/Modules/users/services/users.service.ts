@@ -55,7 +55,7 @@ export class UsersService
     }, err => 
     {
       this._Response = err;
-      // this._Response.message =
+      this._Response.message = "No existe datos al respescto"
     });
 
     return this._Response;
@@ -151,6 +151,7 @@ export class UsersService
 
     }, (err: responseInterface) => 
     {
+
       this._Response = err;
       this._Response.message = err.message || 'No se pudo actualizar la información';
     });
