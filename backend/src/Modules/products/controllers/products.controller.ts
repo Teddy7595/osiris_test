@@ -1,7 +1,7 @@
 import { Request, Body, Controller, Delete, Get, Param, Post, Put, Response } from '@nestjs/common';
 import { responseInterface } from 'src/Response/interfaces/responseHandler.interface';
-import { ProductsService } from '../services/index.services';
-import { ProductDto, UpdateProductDto } from '../models/dto/dto.index';
+import { ProductsService, PurchaseService } from '../services/index.services';
+import { ProductDto, UpdateProductDto, requiredProductsDto} from '../models/dto/dto.index';
 
 @Controller('products')
 export class ProductsController 
@@ -10,7 +10,8 @@ export class ProductsController
 
     constructor
     (
-        private readonly _productServices:ProductsService
+        private readonly _productServices:ProductsService,
+        private readonly _purchaseService:PurchaseService
     ){}
     @Get('hello')
     async hello() { return "hello this is products route by teddy " + this._productServices.sayHello(); }
@@ -34,6 +35,20 @@ export class ProductsController
     {
         console.log(product);
         this._Response = await this._productServices.setProduct(product);
+        return res.status(this._Response.status).json(this._Response);
+    }
+
+    @Post('/verify')
+    async verifyProducts(@Body() product:requiredProductsDto, @Response() res:any):Promise<responseInterface>
+    {
+        this._Response = await this._purchaseService.verifyOrder(product);
+        return res.status(this._Response.status).json(this._Response);
+    }
+
+    @Post('/purchase')
+    async purchaseProducts(@Body() product:requiredProductsDto, @Response() res:any):Promise<responseInterface>
+    {
+        this._Response = await this._purchaseService.generatePurchase(product);
         return res.status(this._Response.status).json(this._Response);
     }
 

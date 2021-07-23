@@ -65,7 +65,7 @@ export class ProductsService
 
     async getOne(id:string):Promise<responseInterface>
     {
-        const _args =
+        const _args:_argsFind =
         {
             findObject: 
             {

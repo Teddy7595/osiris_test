@@ -1,6 +1,7 @@
 import { IsNotEmpty, IsString, IsArray, IsNumber } from "class-validator";
 
-export class ProductDto {
+export class ProductDto 
+{
 
     @IsString()
     @IsNotEmpty()
@@ -17,7 +18,8 @@ export class ProductDto {
     photo: object;
 }
 
-export class UpdateProductDto {
+export class UpdateProductDto 
+{
 
     @IsString()
     @IsNotEmpty()
@@ -34,4 +36,15 @@ export class UpdateProductDto {
     photo: object;
 
     updatedAt: string[];
+}
+
+export class requiredProductsDto
+{
+    @IsArray()
+    @IsNotEmpty()
+    list: Array<{"prod_id": string, "count":number}>;
+
+    @IsString()
+    @IsNotEmpty()
+    user_id: string;
 }
