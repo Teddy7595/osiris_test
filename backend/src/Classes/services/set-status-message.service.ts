@@ -1,14 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class SetStatusMessageService {
-
-
-
-
-    setMessage(message: string, status){
-
-
+export class SetStatusMessageService 
+{
+    setMessage(message: string, status)
+    {
         switch (status) {
             case 200:
                 return `${message} exitosamente`
@@ -26,7 +22,6 @@ export class SetStatusMessageService {
             default:
                 break;
         }
-
     }
 
 }

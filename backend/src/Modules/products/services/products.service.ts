@@ -57,6 +57,9 @@ export class ProductsService
         }, (err:responseInterface) => 
             {
             this._Response = err;
+            this._Response.ok = false;
+            this._Response.data = [];
+            this._Response.err = err.message;
             this._Response.message = "No existe datos al respescto"
         });
 
@@ -80,6 +83,9 @@ export class ProductsService
         }, (err:responseInterface)=>
         {
             this._Response = err;
+            this._Response.ok = false;
+            this._Response.data = [];
+            this._Response.err = err.message;
             this._Response.message = err.message || 'Producto inexistente'
         });
 
@@ -99,6 +105,9 @@ export class ProductsService
         {
 
             this._Response = err;
+            this._Response.ok = false;
+            this._Response.data = [];
+            this._Response.err = err.message;
             this._Response.message = err.message;
 
         });
@@ -134,6 +143,9 @@ export class ProductsService
         {
             
             this._Response = err;
+            this._Response.ok = false;
+            this._Response.data = [];
+            this._Response.err = err.message;
             this._Response.message = err.message || 'No se pudo actualizar la información';
 
         });

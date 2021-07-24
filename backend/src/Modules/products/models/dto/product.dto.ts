@@ -42,7 +42,7 @@ export class requiredProductsDto
 {
     @IsArray()
     @IsNotEmpty()
-    list: Array<{"prod_id": string, "count":number}>;
+    list: Array<{"prod_id": string, "qnty":number}>;
 
     @IsString()
     @IsNotEmpty()

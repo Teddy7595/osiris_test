@@ -16,7 +16,7 @@ import { sessionDTO } from "src/Modules/auth/dto";
 export class UsersService
 {
 
-  _Response: responseInterface;
+  private _Response: responseInterface;
 
   constructor
   (
@@ -28,7 +28,7 @@ export class UsersService
   ){}
 
 
-  async getAll(page): Promise<responseInterface> 
+  async getAll(page:number): Promise<responseInterface> 
   {
 
     const parameters: _dataPaginator = 
@@ -159,44 +159,6 @@ export class UsersService
     return this._Response;
   }
 
-  async modifyActiveUser(status: string, _id: string): Promise<responseInterface> 
-  {
-    // se crea un objeto con los nuevos valores
-    const data =
-    {
-      status: status,
-      updatedAt: this._dateProcessService.setDate(),
-    }
-
-    // se crea el objeto de argumentos con el id de busqueda en especifico y la data a reemplazar en set
-    const args: _argsUpdate = 
-    {
-      findObject: 
-      {
-        _id: _id,
-      },
-      set: 
-      {
-        $set: data
-      },
-      populate: 
-      {
-        path: 'usuario',
-        select: '-pass'
-      }
-    }
-
-    await this._processData._updateDB(this.UsersModel, args).then(async r => {
-
-      this._Response = r;
-      this._Response.message = 'Usuario desactivado!';
-
-    }, err => {
-      this._Response = err;
-    });
-    return this._Response;
-  }
-
   async deleteUsers(id:string):Promise<responseInterface>
   {
     await this._processData._deleteSoftDB(this.UsersModel, id ).then((r: responseInterface)  => 
@@ -208,6 +170,9 @@ export class UsersService
     }, (err:responseInterface) => 
     {
       this._Response = err;
+      this._Response.ok = false;
+      this._Response.data = [];
+      this._Response.err = err.message;
       this._Response.message = err.message || 'No se pudo eliminar al usuario';
     });
 

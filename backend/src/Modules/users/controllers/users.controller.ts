@@ -28,6 +28,7 @@ import { responseInterface } from "src/Response/interfaces/interfaces.index";
 import { UsersService } from "../services/services.index";
 import { updateUserDto } from "../models/dto/user.dto";
 import {AuthGuard} from "@nestjs/passport";
+import { AdminGuard } from "src/Guards/admin.guard";
 
 @Controller("users")
 export class UsersController {
@@ -38,7 +39,7 @@ export class UsersController {
   @Get("hello")
   async hello(){ return "hello this is route users by teddy" }
 
-  //@UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), AdminGuard)
   @Get(":id")
   async getOneUser( @Param("id") id: string, @Response() res: any ): Promise<responseInterface>
   {
@@ -47,7 +48,7 @@ export class UsersController {
     return res.status(this._Response.status).json(this._Response);
   }
 
-  //@UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   async getUsers(@Response() res: any, @Request() req: any ): Promise<responseInterface>
   {
@@ -57,7 +58,7 @@ export class UsersController {
     return res.status(this._Response.status).json(this._Response);
   }
 
-  //@UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), AdminGuard)
   @Post()
   async setUsers(@Body() body:Users, @Response() res:any ): Promise<responseInterface>
   {
@@ -66,7 +67,7 @@ export class UsersController {
     return res.status(this._Response.status).json(this._Response);
   }
 
-  //@UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'))
   @Put(':id')
   @UsePipes(ValidationPipe)
   async modifyUsers(@Body() user: updateUserDto, @Param('id') id:string, @Response() res:any)
@@ -76,7 +77,7 @@ export class UsersController {
     return res.status(this._Response.status).json(this._Response);
   }
 
-  //@UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   async deleteUsers(@Param('id') id:string, @Response() res:any)
   {

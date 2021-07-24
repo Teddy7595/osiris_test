@@ -1,9 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
 import * as  Moment from "moment-timezone";
-// const dateMoment = Moment().tz("America/Montevideo");
-// dateMoment.locale('es');
-
 
 
 @Injectable()
@@ -11,7 +8,7 @@ export class DateProcessService {
 
     setDate(){
 
-        let dateMoment = Moment().tz("America/Montevideo");
+        let dateMoment = Moment().tz("America/Caracas");
         dateMoment.locale('es');
 
         return dateMoment.format('dddd,LL,h:mm A').split(',');
@@ -20,7 +17,7 @@ export class DateProcessService {
 
     getShortDate()
     {
-        let dateMoment = Moment().tz("America/Montevideo");
+        let dateMoment = Moment().tz("America/Caracas");
         dateMoment.locale('es');
     	return dateMoment.format('LL');
     }
@@ -28,7 +25,7 @@ export class DateProcessService {
     getDiffInDays(date:any)
     {
         let days:number = 0;
-        let dateMoment = Moment().tz("America/Montevideo");
+        let dateMoment = Moment().tz("America/Caracas");
         dateMoment.locale('es');
         return dateMoment.diff(Moment(date), 'days');
     }
@@ -48,7 +45,7 @@ export class DateProcessService {
 
     getBackpointInTime(days:number)
     {
-        let dateMoment = Moment().tz("America/Montevideo");
+        let dateMoment = Moment().tz("America/Caracas");
         dateMoment.locale('es');
     	return dateMoment.subtract(days, "days");
     }
@@ -56,7 +53,7 @@ export class DateProcessService {
     //funcion que me retorna fecha futura en base a dias
     getNextPointInTime(days:number)
     {
-        let dateMoment = Moment().tz("America/Montevideo");
+        let dateMoment = Moment().tz("America/Caracas");
         dateMoment.locale('es');
         return dateMoment.add(days, 'days').format('LL');
     }

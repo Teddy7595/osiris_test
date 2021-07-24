@@ -7,40 +7,36 @@ import { DateProcessService } from "../classes.index";
 
 @Injectable()
 export class ProcessDataService {
-  constructor(
+  constructor
+  (
     private _dateProcessService: DateProcessService
-  ){
+  ){}
 
-  }
+  async _findDB(dataBody: any, parameters: _argsPagination = null): Promise<responseInterface> 
+  {
 
-  async _findDB(dataBody: any, parameters: _argsPagination = null): Promise<responseInterface> {
+    return new Promise(async (resolve, reject) => 
+    {
 
-    return new Promise(async (resolve, reject) => {
-
-    await dataBody.paginate(
-      parameters.findObject,
-			parameters.options,
-			(error, response) => {
-
+    await dataBody.paginate( parameters.findObject, parameters.options, (error, response) => 
+    {
 				if (error) {
 
-          const resp: responseInterface = {
+          const resp: responseInterface = 
+          {
             ok: false,
             status: 500,
             message: 'Algo ha salido mal, intente más tarde',
             err: error,
           };
-          console.log('el error este', error);
           reject(resp);
-
         }
 
-        // console.log('el retorno aca', response);
+        if(!response)
+        {
 
-        // console.log('response', response);
-        if(!response){
-
-          const resp: responseInterface = {
+          const resp: responseInterface = 
+          {
             ok: false,
             status: 404,
             message: 'No hay resultados en este momento',
@@ -51,8 +47,8 @@ export class ProcessDataService {
 
         }
 
-
-        const resp: responseInterface = {
+        const resp: responseInterface = 
+        {
           ok: true,
           status: 200,
           data: response.itemsList,
@@ -65,38 +61,39 @@ export class ProcessDataService {
     });
   }
 
-  async _findDBAggregate(dataBody: any, parameters: _argsPaginationAggregate = null): Promise<responseInterface> {
+  async _findDBAggregate(dataBody: any, parameters: _argsPaginationAggregate = null): Promise<responseInterface> 
+  {
 
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => 
+    {
 
 
-    const myAggregate = dataBody.aggregate(
-      parameters.aggregate
-    );
+      const myAggregate = dataBody.aggregate(
+        parameters.aggregate
+      );
 
-    await dataBody.aggregatePaginate(
-      myAggregate,
-			parameters.options,
-			(error, response) => {
+      await dataBody.aggregatePaginate(myAggregate, parameters.options, (error, response) => 
+      {
 
-				if (error) {
+				if (error) 
+        {
 
-          const resp: responseInterface = {
+          const resp: responseInterface = 
+          {
             ok: false,
             status: 500,
             message: 'Algo ha salido mal, intente más tarde',
             err: error,
           };
-          console.log('el error este', error);
           reject(resp);
 
         }
 
+        if(!response)
+        {
 
-        // console.log('response', response);
-        if(!response){
-
-          const resp: responseInterface = {
+          const resp: responseInterface = 
+          {
             ok: false,
             status: 404,
             message: 'No hay resultados en este momento',
@@ -107,9 +104,8 @@ export class ProcessDataService {
 
         }
 
-          console.log('consulta con aggregate', response);
-
-        let paginatorMeta = {
+        let paginatorMeta = 
+        {
           itemCount: response.itemCount,
           perPage: response.perPage,
           currentPage: response.currentPage,
@@ -121,7 +117,8 @@ export class ProcessDataService {
           next: response.next,
         }
 
-        const resp: responseInterface = {
+        const resp: responseInterface = 
+        {
           ok: true,
           status: 200,
           data: response.itemsList,
@@ -130,47 +127,51 @@ export class ProcessDataService {
         resolve(resp);
 
     	});
-
     });
   }
 
-  async _AllFindDB(dataBody: any, parameters: _argsPagination = null): Promise<responseInterface> {
+  async _findOneDB( dataBody: any, parameters: _argsFind ): Promise<responseInterface> 
+  {
 
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => 
+    {
 
-    await dataBody.find(
-      parameters.findObject,
-      (error, response) => {
+      await dataBody.findOne(parameters.findObject)
+      .populate(parameters.populate)
+      .select(parameters.select)
+      .exec((error, response) => 
+      {
 
-        if (error) {
-
-          const resp: responseInterface = {
+        if(error)
+        {
+          const resp: responseInterface = 
+          {
             ok: false,
             status: 500,
             message: 'Algo ha salido mal, intente más tarde',
             err: error,
           };
           reject(resp);
-
         }
 
-        if(!response){
-
-          const resp: responseInterface = {
+        if(!response)
+        {
+          console.log('inexistente');
+          const resp: responseInterface = 
+          {
             ok: false,
-            status: 404,
-            message: 'No hay resultados en este momento'
-
+            status: 404
           };
           reject(resp);
-
         }
 
-        const resp: responseInterface = {
+        const resp: responseInterface = 
+        {
           ok: true,
           status: 200,
-          data: response
+          data: response,
         };
+          
         resolve(resp);
 
       });
@@ -178,58 +179,17 @@ export class ProcessDataService {
     });
   }
 
-  async _findOneDB( dataBody: any, parameters: _argsFind ): Promise<responseInterface> {
+  async _findAllDB( dataBody: any, parameters: _argsFind ): Promise<responseInterface> 
+  {
 
-    // console.log('llega al findone', parameters);
-    return new Promise(async (resolve, reject) => {
-
-      await dataBody.findOne(parameters.findObject)
-      .populate(parameters.populate)
-      .select(parameters.select)
-      .exec((error, response) => {
-
-        if(error){
-          console.log('hubo error', error);
-          const resp: responseInterface = {
-            ok: false,
-            status: 500,
-            message: 'Algo ha salido mal, intente más tarde',
-            err: error,
-          };
-          reject(resp);
-        }
-
-        if(!response){
-          console.log('inexistente');
-          const resp: responseInterface = {
-            ok: false,
-            status: 404
-          };
-          reject(resp);
-        }
-        console.log('consulta realizada', response);
-          const resp: responseInterface = {
-            ok: true,
-            status: 200,
-            data: response,
-          };
-          resolve(resp);
-
-
-    });
-
-    });
-  }
-
-  async _findAllDB( dataBody: any, parameters: _argsFind ): Promise<responseInterface> {
-
-    // console.log('llega al findone', parameters);
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => 
+    {
 
       await dataBody.find(parameters.findObject)
       .populate(parameters.populate)
       .select(parameters.select)
-      .exec((error, response) => {
+      .exec((error, response) => 
+      {
 
         if(error){
           console.log('hubo error', error);
@@ -251,17 +211,18 @@ export class ProcessDataService {
           };
           reject(resp);
         }
-        // console.log('respuesta petición', response);
-          const resp: responseInterface = {
-            ok: true,
-            status: 200,
-            data: response,
-          };
-          resolve(resp);
+
+        const resp: responseInterface = 
+        {
+          ok: true,
+          status: 200,
+          data: response,
+        };
+          
+        resolve(resp);
 
 
-    });
-
+      });
     });
   }
 
@@ -351,9 +312,11 @@ export class ProcessDataService {
       await dataBody.updateMany(
 				parameters.findObject,
 				parameters.set,
-				{ new: true }, async (error, response) => {
+				{ new: true }, async (error, response) => 
+        {
 
-					if (error) {
+					if (error) 
+          {
             console.log('hubo error', error);
             const resp: responseInterface = {
               ok: false,
@@ -388,23 +351,23 @@ export class ProcessDataService {
 
 
 
-   async objectContains(obj, term: string) {
+  async objectContains(obj, term: string) 
+  {
 
-
-    // console.log('el ter', term);
     let o: string = JSON.stringify(obj);
     let r: any = null;
-    await this.diacriticSensitiveRegex(term).then(resp => {
+    await this.diacriticSensitiveRegex(term).then(resp => 
+    {
 
       r = resp;
     });
     let regex = new RegExp(r, "i");
-    // console.log('resp', r);
 
-        // console.log('regex', regex);
-    if( regex.test(o) ){
+    if( regex.test(o) )
+    {
       return true;
-    }else{
+    }else
+    {
       return false;
     }
 
@@ -412,34 +375,29 @@ export class ProcessDataService {
   }
 
 
-  async findAllText(registros: any, arg: string){
+  async findAllText(registros: any, arg: string)
+  {
 
-    return new Promise(async (resolve,reject) =>{
+    return new Promise(async (resolve,reject) =>
+    {
 
-      // let busqueda = { $regex: this.diacriticSensitiveRegex(arg), $options: 'i' }
-
-      // console.log('this.diacriticSensitiveRegex(arg)', this.diacriticSensitiveRegex(arg));
 
       let regs = [];
-      let x = new Promise(async (resolve, reject) => {
+      let x = new Promise(async (resolve, reject) => 
+      {
 
-        await registros.forEach(async (element, idx) => {
+        await registros.forEach(async (element, idx) => 
+        {
 
-
-          // console.log('el elemento la cosa', element);
-
-          if(  await this.objectContains( element, arg ) == true ){
+          if(  await this.objectContains( element, arg ) == true )
+          {
 
             regs.push(element);
 
           }
 
         });
-
-
         resolve(true);
-
-
       });
 
       await x.then();
@@ -465,7 +423,6 @@ export class ProcessDataService {
       .exec(async (error, response) => {
 
         if(error){
-          console.log('hubo error', error);
           const resp: responseInterface = {
             ok: false,
             status: 500,
@@ -476,7 +433,6 @@ export class ProcessDataService {
         }
 
         if(!response){
-          console.log('inexistente');
           const resp: responseInterface = {
             ok: false,
             status: 404
@@ -504,32 +460,27 @@ export class ProcessDataService {
 
         })
 
-
-
-
       });
-
-
 
     })
 
   }
 
 
-  async _deleteSoftDB(dataBody: any, id: string): Promise<responseInterface> {
-    return new Promise(async (resolve, reject) => {
+  async _deleteSoftDB(dataBody: any, id: string): Promise<responseInterface> 
+  {
+    return new Promise(async (resolve, reject) => 
+    {
 
 
-      await dataBody.findOneAndUpdate(
-				{_id: id},
-        { $set: {
-          updatedAt: this._dateProcessService.setDate()
-        }},
-				{ new: true }, async (error, response) => {
+      await dataBody.findOneAndUpdate({_id: id},{ $set: {updatedAt: this._dateProcessService.setDate()}},
+				{ new: true }, async (error, response) => 
+        {
 
-          if (error) {
-            console.log('hubo error', error);
-            const resp: responseInterface = {
+          if (error) 
+          {
+            const resp: responseInterface = 
+            {
               ok: false,
               status: 500,
               message: 'Algo ha salido mal, intente más tarde',
@@ -538,8 +489,10 @@ export class ProcessDataService {
             reject(resp);
 					}
 
-					if (!response) {
-					  const resp: responseInterface = {
+					if (!response) 
+          {
+					  const resp: responseInterface = 
+            {
               ok: true,
               status: 404,
 
@@ -547,14 +500,15 @@ export class ProcessDataService {
             reject(resp);
           }
 
-          if(response){
+          if(response)
+          {
 
-            await dataBody.delete({
-              _id: id
-            }).exec(function (error, response) {
-              if (error) {
-                console.log('hubo error', error);
-                const resp: responseInterface = {
+            await dataBody.delete({_id: id}).exec(function (error, response) 
+            {
+              if (error) 
+              {
+                const resp: responseInterface = 
+                {
                   ok: false,
                   status: 500,
                   message: 'Algo ha salido mal, intente más tarde',
@@ -562,8 +516,10 @@ export class ProcessDataService {
                 };
                 reject(resp);
               }
-              if (!response) {
-                const resp: responseInterface = {
+              if (!response) 
+              {
+                const resp: responseInterface = 
+                {
                   ok: true,
                   status: 400,
 
@@ -571,42 +527,36 @@ export class ProcessDataService {
                 reject(resp);
               }
 
-              const resp: responseInterface = {
+              const resp: responseInterface = 
+              {
                 ok: true,
                 status: 200,
 
               };
               resolve(resp);
-
-
-
-             });
+            });
 
           }
 
         });
-
-
-
     });
   }
 
 
-  async addToObject(objeto, elemento){
-
-    // let o = objeto;
+  async addToObject(objeto, elemento)
+  {
 
     let o = JSON.stringify(objeto);
     o = JSON.parse(o);
 
-    // console.log('aaa', Object.assign(o, elemento));
 
     return Object.assign(o, elemento);
 
 
   }
 
-  async diacriticSensitiveRegex(string = '') {
+  async diacriticSensitiveRegex(string = '') 
+  {
     return string.replace(/a/g, '[a,á,à,ä]')
       .replace(/e/g, '[e,é,ë]')
       .replace(/i/g, '[i,í,ï]')

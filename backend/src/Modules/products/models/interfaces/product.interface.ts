@@ -7,19 +7,38 @@ export interface productInterface
     photo     ?: object;
     updatedAt ?: string[];
 
-}//para manejo de tipos de datos en paràmetros de funciones de manejo de productos
+}//para manejo de tipos de datos para funciones de manejo de productos
 
 export interface requiredProductsInterface
 {
-    list    ?: Array<{'prod_id':string, 'count':number}>;   //lista de pedidos
-    user_id ?: string //id del usuario
+    list    ?: {'prod_id':string, 'qnty':number}[];   //lista de pedidos
+    user_id ?: string; //id del usuario
 
 }//para manejo de solicitudes de compras
 
 export interface verifiedProductsInterface
 {
     prod_id ?: string; 
+    qnty    ?: number;
     reason  ?: string; //por si ocurre algún problema con un producto en específico
     ok      ?: boolean;
 
 }//para manejo de solicitudes de disponibilidad de productos
+
+export interface salesItemInterface
+{
+    name    :string; 
+    qnty    :number; 
+    price   :number; 
+    sbtotal :number;
+
+}//para manejo de item individual de compra, esto será lo que verá el usuario al hacer la compra
+
+export interface salesCheckInterface
+{
+    list      ?: salesItemInterface[];
+    errors    ?: {'prod_id':string, 'codStatus':number, 'reason':string}[];
+    total     ?: number;
+    user_id   ?: string;
+    createdAt ?: string[];
+}//para manejo de facturas y similares
