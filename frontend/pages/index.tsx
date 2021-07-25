@@ -1,12 +1,12 @@
-import Navigation from '../components/navegation'
+import Layout from '../components/Layout.component';
+import Store from '../components/store.component';
 
-const Index = () =>
-{
-
+export default function Home() {
   return (
-    <div>
-      <Navigation/>
-    </div>
-  );
+    <Layout>
+      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+        <Store/>
+      </div>
+    </Layout>
+  )
 }
-export default Index;
