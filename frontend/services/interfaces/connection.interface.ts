@@ -1,4 +1,4 @@
-export const enum dir
+export enum dir
 {
-    LOCALHOST = 'localhost'
+    LOCALHOST = 'http://localhost:3500' //conexión de nestjs
 }

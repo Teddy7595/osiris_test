@@ -24,6 +24,7 @@ export class ProductsController
     async getProducts(@Response() res:any, @Request() req:any):Promise<responseInterface>
     {
         this._Response = await this._productServices.getAll(req.page); 
+        console.log(this._Response)
         return res.status(this._Response.status).json(this._Response);
     }
 
@@ -31,6 +32,13 @@ export class ProductsController
     async getOne(@Param('id') id:string, @Response() res:any):Promise<responseInterface>
     {
         this._Response = await this._productServices.getOne(id); 
+        return res.status(this._Response.status).json(this._Response);
+    }
+
+    @Get('purchase/history/:id')
+    async getHistorySales(@Param('id') id:string, @Request() req:any, @Response() res:any):Promise<responseInterface>
+    {
+        this._Response = await this._purchaseService.getAllHistoryById(id, req.page); 
         return res.status(this._Response.status).json(this._Response);
     }
 

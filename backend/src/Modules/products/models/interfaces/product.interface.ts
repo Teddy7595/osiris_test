@@ -42,3 +42,12 @@ export interface salesCheckInterface
     user_id   ?: string;
     createdAt ?: string[];
 }//para manejo de facturas y similares
+
+export interface historyPurchaseInterface
+{
+    userId      : string;
+    productsId  : string;
+    price       : number;
+    qnty        : number;
+    subttl      : number;
+}//para manejo del modelo de historial de compras

@@ -1,18 +1,18 @@
 import { Injectable } from '@nestjs/common';
-
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { ProductsService } from './products.service';
-
-import { responseInterface, _argsFind } from 'src/Response/interfaces/interfaces.index';
-
+import { responseInterface, _argsFind, _argsPagination, _configPaginator, _dataPaginator } from 'src/Response/interfaces/interfaces.index';
 import { 
+    historyPurchaseInterface,
     productInterface, 
     requiredProductsInterface, 
     salesCheckInterface, 
     salesItemInterface, 
     verifiedProductsInterface 
 } from '../models/interfaces/product.interface';
-
 import { ProcessDataService, DateProcessService } from "src/Classes/classes.index";
+import { History } from '../models/schemas/historySchema';
 
 @Injectable()
 export class PurchaseService 
@@ -22,8 +22,10 @@ export class PurchaseService
 
     constructor
     (
-        private _dateProcessService: DateProcessService,
-        private readonly _productService:ProductsService
+        private readonly _dateProcessService: DateProcessService,
+        private readonly _processData:ProcessDataService,
+        private readonly _productService:ProductsService,
+        @InjectModel(History.name) private HistoryModel:Model<History>
     ){}
 
     /** confirmo la compra y genero la dinamica de modificación de stock */
@@ -99,7 +101,6 @@ export class PurchaseService
     //              METODOS DE USO GENERAL                   //
     ///////////////////////////////////////////////////////////
 
-    //reuso los servicios ya planteados para manipulacion del schema de productos
     //funciòn para búsqueda de productos
     private async findOneProduct(id:string):Promise<responseInterface>
     {   
@@ -148,6 +149,15 @@ export class PurchaseService
                 this._SalesCheck.list.push(item); 
                 this._SalesCheck.total += item.sbtotal; 
 
+                //genero una traza de la compra exitosa tomando el id del usuario y ciertos valores de peso del producto
+                this.generateTrace({
+                    'userId'    : this._SalesCheck.user_id, 
+                    'productsId': product._id, 
+                    'qnty'      : item.qnty, 
+                    'price'     : item.price,
+                    'subttl'    : item.sbtotal
+                });
+
             }else this.errorInSales(_response, {'prod_id': product._id });
             
         }else
@@ -193,6 +203,62 @@ export class PurchaseService
         });
 
         
+    }
+
+    /** funcion que genera una entrada al historial de compras */
+    private async generateTrace(history:historyPurchaseInterface):Promise<responseInterface>
+    {
+        const data = new this.HistoryModel(history);
+        let _response:responseInterface
+
+        await this._processData._saveDB(data).then((r:responseInterface)=>
+        {
+            _response = r;
+
+        }, (err:responseInterface) =>
+        {
+
+            _response = err;
+            _response.ok = false;
+            _response.data = [];
+            _response.err = err.message;
+            _response.message = err.message;
+
+        });
+
+        return _response;
+    }
+
+    async getAllHistoryById(id:string, page:number): Promise<responseInterface> 
+    {
+
+        const parameters: _dataPaginator = 
+        { 
+            page: page || _configPaginator.page,
+            limit: 12 || _configPaginator.limit,
+            customLabels: _configPaginator.customLabels,
+            sort: { _id: -1 }
+        }
+
+        const args: _argsPagination = 
+        {
+
+            findObject: {_id: id},
+            options: parameters
+
+        }
+
+        await this._processData._findDB(this.HistoryModel, args).then(r => 
+        {
+            this._Response = r;
+        }, err => 
+        {
+            this._Response = err;
+            this._Response.message = "No existe datos al respescto"
+        });
+
+        return this._Response;
+
     }
 
 }

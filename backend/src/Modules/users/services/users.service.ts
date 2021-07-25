@@ -11,6 +11,7 @@ import { ProcessDataService, DateProcessService } from "src/Classes/classes.inde
 import { _configPaginator, _dataPaginator, _argsPagination, _argsUpdate} from 'src/Response/interfaces/interfaces.index';
 import { updateUserDto } from "../models/dto/user.dto";
 import { sessionDTO } from "src/Modules/auth/dto";
+import { userInterface } from "../models/interfaces/user.interface";
 
 @Injectable()
 export class UsersService
@@ -101,20 +102,8 @@ export class UsersService
     return this._Response;
   }
 
-  async updateUsers(user:updateUserDto, id:string): Promise<responseInterface>
+  async updateUsers(user:userInterface, id:string): Promise<responseInterface>
   {
-    
-    // se crea un objeto con los nuevos valores
-    const data: updateUserDto = 
-    {
-
-      name: user.name,
-      last_name: user.last_name,
-      dir_domicilio:user.dir_domicilio,
-      email: user.email,
-      pass: user.pass,
-      updatedAt: this._dateProcessService.setDate(),
-    }
 
     // se crea el objeto de argumentos con el id de busqueda en especifico y la data a reemplazar en set
     const args: _argsUpdate = 
@@ -125,7 +114,7 @@ export class UsersService
       },
       set: 
       {
-        $set: data
+        $set: user
       }
     }
 

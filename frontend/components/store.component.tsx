@@ -1,7 +1,16 @@
 import React from 'react';
+import { useQuery } from 'react-query';
+import { dir } from '../services/interfaces/connection.interface';
+import { DataFromServerService } from '../services/dataFromServer.services';
 
 export default function Store()
 {
+    let page = 1;
+    let link = new DataFromServerService(`${dir.LOCALHOST}/products`);
+    const result = useQuery(['products', page], async()=> await link.getDataWithPaginator(page));
+    
+    console.log(result);
+
     return(
         <div className="flex flow-row">
             <div className="flex flex-col justify-center items-center max-w-sm mx-4 my-8">

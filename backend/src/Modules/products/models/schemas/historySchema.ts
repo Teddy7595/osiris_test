@@ -26,7 +26,25 @@ export class History extends Document {
     required: true,
     default: null,
   })
-  productId: string;
+  productsId: string;
+
+  @Prop({
+    required: true,
+    default: null,
+  })
+  price: number;
+
+  @Prop({
+    required: true,
+    default: null,
+  })
+  qnty: number;
+
+  @Prop({
+    required: true,
+    default: null,
+  })
+  subttl: number;
 
   @Prop({
     type:   Array,
@@ -34,12 +52,6 @@ export class History extends Document {
     default: _dateService.setDate(),
   })
   createdAt: string;
-
-  @Prop({
-    type: Array,
-    default: null,
-  })
-  updatedAt: string;
 }
 
 export const HistorySchema = SchemaFactory.createForClass(History)

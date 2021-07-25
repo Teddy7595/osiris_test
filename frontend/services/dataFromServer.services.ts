@@ -3,17 +3,27 @@ import { responseInterface } from "./interfaces/response.interface";
 export class DataFromServerService
 {
     private _Response:responseInterface;
-    constructor(){}
+    private URL:string;
+    constructor(url:string){this.URL = url;}
 
-    async getDataById(url:string, id:string):Promise<responseInterface>
+    async getDataById(id:string):Promise<responseInterface>
     {
-        this._Response = await fetch(`${url}/${id}`);
+        await fetch(`${this.URL}/${id}`).then((r)=>
+        {
+            this._Response = r;
+            return;
+        });
         return this._Response;
     }
 
-    async getDataWithPaginator(url:string, page:number):Promise<responseInterface>
+    async getDataWithPaginator(page:number):Promise<responseInterface>
     {
-        this._Response = await fetch(`${url}/?paginate=${page}`);
+        await fetch(`${this.URL}/?paginate=${page}`).then((r)=>
+        {
+            this._Response = r;
+            console.log(this._Response.data)
+            return;
+        });
         return this._Response;
     }
 }

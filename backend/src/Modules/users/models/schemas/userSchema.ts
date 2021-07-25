@@ -82,13 +82,13 @@ export class Users extends Document {
     required: true,
     default: _dateService.setDate(),
   })
-  createdAt: string;
+  createdAt: string[];
 
   @Prop({
     type: Array,
     default: null,
   })
-  updatedAt: string;
+  updatedAt: string[];
 }
 
 export const UsersSchema = SchemaFactory.createForClass(Users)
