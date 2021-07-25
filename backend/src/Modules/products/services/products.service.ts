@@ -155,6 +155,20 @@ export class ProductsService
 
     async delete(id:string):Promise<responseInterface> 
     {
-        return this._Response;
+        await this._processData._deleteSoftDB(this.ProductsModel, id ).then((r: responseInterface)  => 
+        {
+            this._Response = r;
+            this._Response.message = 'Producto eliminado';
+
+        }, (err:responseInterface) => 
+        {
+            this._Response = err;
+            this._Response.ok = false;
+            this._Response.data = [];
+            this._Response.err = err.message;
+            this._Response.message = err.message || 'No se pudo eliminar el producto';
+        });
+
+        return this._Response; 
     }
 }

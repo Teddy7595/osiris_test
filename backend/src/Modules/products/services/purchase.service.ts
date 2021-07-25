@@ -243,7 +243,7 @@ export class PurchaseService
         const args: _argsPagination = 
         {
 
-            findObject: {_id: id},
+            findObject: {userId: id},
             options: parameters
 
         }

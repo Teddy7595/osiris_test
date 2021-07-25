@@ -18,7 +18,7 @@ export class History extends Document {
 
   @Prop({
     required: true,
-    default: null,
+    default: null
   })
   userId: string;
 
