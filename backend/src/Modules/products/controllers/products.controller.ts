@@ -2,7 +2,7 @@ import { Request, Body, Controller, Delete, Get, Param, Post, Put, Response, Use
 import { responseInterface } from 'src/Response/interfaces/responseHandler.interface';
 import { ProductsService, PurchaseService } from '../services/index.services';
 import { ProductDto, UpdateProductDto, requiredProductsDto} from '../models/dto/dto.index';
-import { FileInterceptor } from '@nestjs/platform-express/multer';
+import { AnyFilesInterceptor } from '@nestjs/platform-express/multer';
 import { AuthGuard } from '@nestjs/passport';
 import { AdminGuard } from 'src/Guards/admin.guard';
 
@@ -83,12 +83,20 @@ export class ProductsController
         return res.status(this._Response.status).json(this._Response);
     }
     
-    /* @UseGuards(AuthGuard('jwt'), AdminGuard)
-    @Post('import')
-    @UseInterceptors(FileInterceptor('photo'))
-    async uploadPhoto(@UploadedFiles() file:File, @Response() res:any):Promise<responseInterface>
+
+    @Post("upload/:id")
+    @UseInterceptors(AnyFilesInterceptor()) uploadFile(@UploadedFiles() files, @Request() req: any, @Response() res: any) 
     {
-        console.log(file);
-        return res.status(200).json(file);
-    } */
+        console.log(files[0]);
+
+        /**TODO
+         * 
+         * TOMAR EL ARCHIVO Y CONVERTIRLO EN IMAGEN
+         * EN BASE AL ID DEL PRODUCTO ASIGNARLE LA CONSTANTE PRD_[SEGUIDO DEL ID DEL PRODUCTO]
+         * GUARDARLO EN CARPETA PUBLICA
+         * RETORNAR EL RESULTADO DONDE SE LE DA LA RUTA DE IMAGEN AL USUARIO PARA QUE SE LA ASIGNE 
+         * AL PRODUCTO O EN EL CASO DEL PERFIL DE USUARIO ESTE UEDA AÑADIRLO EN LA FOTO DE PERFIL
+         */
+        res.end();
+    }
 }

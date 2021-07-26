@@ -1,7 +1,6 @@
 import { Global, Module } from "@nestjs/common";
 import {
   DateProcessService,
-  FilesService,
   ProcessDataService,
   SetStatusMessageService
 } from "./classes.index";
@@ -10,7 +9,7 @@ import {
 @Module({
   imports: [],
   controllers: [],
-  providers: [DateProcessService, FilesService, ProcessDataService, SetStatusMessageService],
-  exports: [DateProcessService, FilesService, ProcessDataService, SetStatusMessageService],
+  providers: [DateProcessService, ProcessDataService, SetStatusMessageService],
+  exports: [DateProcessService, ProcessDataService, SetStatusMessageService],
 })
 export class ClassesModule {}

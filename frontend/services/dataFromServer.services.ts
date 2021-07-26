@@ -1,4 +1,5 @@
 import { responseInterface } from "./interfaces/response.interface";
+import axios from 'axios';
 
 export class DataFromServerService
 {
@@ -8,22 +9,19 @@ export class DataFromServerService
 
     async getDataById(id:string):Promise<responseInterface>
     {
-        await fetch(`${this.URL}/${id}`).then((r)=>
-        {
-            this._Response = r;
-            return;
-        });
+        this._Response = await (await axios.get(`${this.URL}/${id}`)).data;
         return this._Response;
     }
 
     async getDataWithPaginator(page:number):Promise<responseInterface>
     {
-        await fetch(`${this.URL}/?paginate=${page}`).then((r)=>
-        {
-            this._Response = r;
-            console.log(this._Response.data)
-            return;
-        });
+        this._Response = await (await axios.get(`${this.URL}/?paginate=${page}`)).data;
+        return this._Response;
+    }
+
+    async sendData(pakg:any):Promise<responseInterface>
+    {
+        this._Response = await (await axios.post(`${this.URL}`, pakg)).data;
         return this._Response;
     }
 }

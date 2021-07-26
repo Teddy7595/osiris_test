@@ -186,23 +186,33 @@ export class PurchaseService
         //por si solo me llega un item del "carrito"
         if (order.list.length <= 1) return;
 
-        let merged:any[] = [];
+        let merged:{'prod_id':string, 'qnty':number}[] = Array();
+        let item:{'prod_id':string, 'qnty':number};
+        let i:number = 0;
+        let len:number = order.list.length-1;
 
-        await order.list.forEach((item, index) => 
+        await order.list.sort((a, b) =>
         {
-            for(const i in order.list)
-            {
-                if(order.list[i +1] && order.list[i +1].prod_id === item.prod_id )
-                {
-                    item.qnty += order.list[i +1].qnty;
-                    item = order.list.shift();
-                }
-            }
-            console.log(item);
-            order.list.splice(index, 1);
+            if(a.prod_id === b.prod_id){ a.qnty += b.qnty; return 1}
+            if(b.prod_id === a.prod_id){ a.qnty += b.qnty; return -1}
+            return 0;
         });
 
-        
+        for(let i =0; i < len; ++i)
+        {
+            item = order.list[i];
+
+            if(order.list[i +1].prod_id && item.prod_id !== order.list[i +1].prod_id)
+            {
+                merged.push(order.list[i]);
+            }
+
+        }
+
+        merged.push(order.list[len]);
+        order.list = merged;   
+
+        return order;
     }
 
     /** funcion que genera una entrada al historial de compras */
