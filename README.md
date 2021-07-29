@@ -12,12 +12,12 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
 
 # ---------------- Estructura del backend ----------------
 <ul>
-    <li> El backend se compone de "modulos" completamente individuales uno del otro</li>
+    <li> El backend se compone de "módulos" completamente individuales uno del otro</li>
     <li> Cada módulo posee sus propios controladores, interfaces, servicios, schemas de bases de datos, DTOs y demás </li>
     <li> Cada componente del módulo tiene un espacio de trabajo constituido por carpetas </li>
     <li> Cada carpeta contiene un "indexador" que contiene registrado todo los archivos creados en dicho "espacio de trabajo"/carpeta</li>
     <li> El módulo de base de datos, manejo de fechas, manejo de archivos y demás elementos casi globales estan presentes la carpeta de clases/servicios</li>
-    <li> Las respuestas intersistemas y de usuarios son manejadas por un grupo de interfaces localizados en la carpeta "Response" </li>
+    <li> Las respuestas "intersistemas" y de usuarios son manejadas por un grupo de interfaces localizados en la carpeta "Response" </li>
     <li> Toda la arquitectura procura ser lo mas modular posible de esta forma el programador solo estará enfocado única y exclusivamente en el módulo donde esta "parado" </li>
     <li>Si se requiere de un componente de otro módulo, para poder usarlo se requiere llevar todo el módulo en sí, ya que de esta forma se mantiene la intgridad y pulcritud de la arquitectura</li>
     <li>Los métodoss para manejo de base de datos tienen la función de abstraer lo mas que se pueda la forma en que se maneja esta, con el propósito de solo cambiar lo necesario ante algún cambio de paradigma de bd, o sencillamente algún cambio en la forma de interactuar con la misma</li>
@@ -26,7 +26,7 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
 </ul>
 
 # ---------------- Estructura del frontend ----------------
-<p> En esta se intento recrear un poco la misma arquitectura del back, pero mas simple; mantenindo la consistencia de ciertos tipos de datos manejados en el backend </p>
+<p> En esta se intento recrear un poco la misma arquitectura del back, pero más simple; mantenindo la consistencia de ciertos tipos de datos manejados en el backend </p>
 
 # ---------------- Rutas de la API ----------------
 >Antes de continuar, se recomienta usar los formatos de petició mostrados ya que estos se basan en las interfaces y DTOs que componen la API
@@ -42,7 +42,7 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
             paginator      //retorna el estatus de la paginación del servicio<br>
             err            //en caso de ocurrir algún error grave, dicha variable contendrá el mensaje con detalles del problema<br>
         }<br>
-    <br></li>
+    </li>
     <li>La mayoria de las rutas necesitan un autenticación ó token para poder gozar de las funciones de cada servicio</li>
     <li>Para poder obtener el token solo necesita registrarse e iniciar sesión</li>
     <li>Para poder ser admin solo debe incluir un dominio @admin.com en su usuario Ej: usuario@admin.com</li>
@@ -97,6 +97,7 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
                 </code><br>
             </li>
             <li>servidor/products/upload/idProduct [sube una foto y toma el id del producto a través del query de la ruta para su posterior enlace con el producto en base de datos]</li>
+            <br>
             <li>PUT:</li>
             <li>servidor/products/idProduct [requiere de un objeto con los datos del producto y el id del producto pasado por el query de la ruta] Ej: 
                 <br><code> 
@@ -107,14 +108,19 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
                 }
                 </code><br>
             </li>
+            <br>
             <li>DELETE:</li>
             <li>servidor/products/idProduct [requiere el id del producto pasado por el query de la ruta para borrar logicamente un producto de la bd] </li>
         </ul>
         <ul>
             <li><h4>En el apartado de usaurios tenemos:</h4></li>
             <li>GET:</li>
+            <li>servidor/users/hello [solo verifica si la ruta esta disponible]</li>
+            <li>servidor/users/?paginator=x [retorna todos los users registrados en la bd mediante un paginador donde x es el numero de la página a necesitar, es una ruta administrativa]</li>
+            <li>servidor/users/idUser [retorna el usuario segun el idUser de la ruta y solo puede ser usado cuando esta logeado]</li>
+            <br>
             <li>POST:</li>
-            <li>servidor/products/verify [requiere de un array de objetos con el id del producto y la cantidad para verificar la            disponibilidad de los mismos] Ej: 
+            <li>servidor/users [requiere de un array de objetos donde se contempla losd atos del usuario para ser registrado por medio de un administrador] Ej: 
                 <br><code> 
                 {
                     "name": "teddy", 
@@ -125,8 +131,9 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
                 }
                 </code>
             </li>
+            <br>
             <li>PUT:</li>
-            <li>servidor/users/idUsers [requiere de un objeto con los datos del usuario y el id del mismo pasado por el query de la ruta] Ej: 
+            <li>servidor/users/idUsers [requiere de un objeto con los datos del usuario y el id del mismo pasado por el query de la ruta, se requiere estar logeado para acceder  la función] Ej: 
                 <br><code> 
                 {
                     "name": "usuario modificado",
@@ -136,8 +143,32 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
                 }
                 </code><br>
             </li>
+            <br>
             <li>DELETE:</li>
             <li>servidor/users/idUser [requiere el id del usuario pasado por el query de la ruta para borrarlo de manera lógica de la bd] </li>
+        </ul>
+        <ul>
+            <li><h4>En el apartado de auth tenemos:</h4></li>
+            <li>POST:</li>
+            <li>servidor/auth/signin [requiere de un objeto donde se contempla los datos del usuario para obtener un tóken de autenticación, es decir; iniciar sesión] Ej: 
+                <br><code> 
+                {
+                    "email": "admin@admin.com",
+                    "pass": "teddy7595"
+                }
+                </code><br>
+            </li>
+            <li>servidor/auth/signin [requiere de un objeto donde se contempla los datos del usuario para poder registrarse en la base de datos de la API, es decir; crear usuario] Ej: 
+                <br><code> 
+                {
+                    "name": "teddy",
+                    "last_name": "pottella",
+                    "email": "admin@admin.com",
+                    "dir_domicilio":"san felix",
+                    "pass": "teddy7595"
+                }
+                </code><br>
+            </li>
         </ul>
     </li>
 
