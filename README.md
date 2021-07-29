@@ -3,12 +3,12 @@
 decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
 
 ## ---------------- Tecnologías usadas en el proyecto ---------------- 
->NestJS (su última versión, julio 2021)
->MongoDB (su última version, julio 2021)
->NextJS (su última versión,  julio 2021)
->React (su última version,  julio 2021)
->TailwinCSS (su última versión,  julio 2021)
->TypeScript (su última versión,  julio 2021)
+>NestJS (su última versión, julio 2021)        <br>     
+>MongoDB (su última version, julio 2021)       <br>     
+>NextJS (su última versión,  julio 2021)       <br>     
+>React (su última version,  julio 2021)        <br> 
+>TailwinCSS (su última versión,  julio 2021)   <br>         
+>TypeScript (su última versión,  julio 2021)   <br>         
 
 # ---------------- Estructura del backend ----------------
 <ul>
@@ -32,8 +32,7 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
 >Antes de continuar, se recomienta usar los formatos de petició mostrados ya que estos se basan en las interfaces y DTOs que componen la API
 <br>
 <ul>
-    <li>Todas las rutas tendrán una interfaz de respuesta compuestas por :</li>
-    <li><code>
+    <li>Todas las rutas tendrán una interfaz de respuesta compuestas por : <br><code>
         responseInterface 
         {
             ok             //determina si la operación fue o no exitosa
@@ -43,7 +42,7 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
             paginator      //retorna el estatus de la paginación del servicio
             err            //en caso de ocurrir algún error grave, dicha variable contendrá el mensaje con detalles del problema
         }
-    </code</li>
+    </code><br></li>
     <li>La mayoria de las rutas necesitan un autenticación ó token para poder gozar de las funciones de cada servicio</li>
     <li>Para poder obtener el token solo necesita registrarse e iniciar sesión</li>
     <li>Para poder ser admin solo debe incluir un dominio @admin.com en su usuario Ej: usuario@admin.com</li>
@@ -65,47 +64,47 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
             <li>POST:</li>
             <li>servidor/products/ [guarda un producto en base de datos, se requiere de un nombre, stock, precio] Ej: 
                 <br><code> 
-                {
-                    "name" :"TOMATES",
-                    "stock":12,
-                    "price": 1234.56
-                }
+                {<br>
+                    "name" :"TOMATES",<br>
+                    "stock":12,<br>
+                    "price": 1234.56<br>
+                }<br>
                 </code><br></li></li>
             <li>servidor/products/purchase [requiere un array de productos tomando su id, cantidad, y el id del usuario quien esta haciendo la compra] Ej: 
                 <br><code> 
-                {
+                {<br>
                     "list":
-                    [
-                        {
-                            "prod_id": "60f9b675061e5b1b43a6e0ad",
-                            "qnty": 10
-                        }
-                    ],
-	                "user_id": "60f8a65f7cbaa65a8710d585"
-                }
+                    [<br>
+                        {<br>
+                            "prod_id": "60f9b675061e5b1b43a6e0ad",<br>
+                            "qnty": 10<br>
+                        }<br>
+                    ],<br>
+	                "user_id": "60f8a65f7cbaa65a8710d585"<br>
+                }<br>
                 </code><br></li>
             <li>servidor/products/verify [requiere de un array de objetos con el id del producto y la cantidad para verificar la            disponibilidad de los mismos] Ej: 
                 <br><code> 
-                {
-                    "list":
-                    [
-                        {
-                            "prod_id": "60f9b675061e5b1b43a6e0ad",
-                            "qnty": 10
-                        }
-                    ]
-                }
+                {<br>
+                    "list":<br>
+                    [<br>
+                        {<br>
+                            "prod_id": "60f9b675061e5b1b43a6e0ad",<br>
+                            "qnty": 10<br>
+                        }<br>
+                    ]<br>
+                }<br>
                 </code><br>
             </li>
             <li>servidor/products/upload/idProduct [sube una foto y toma el id del producto a través del query de la ruta para su posterior enlace con el producto en base de datos]</li>
             <li>PUT:</li>
             <li>servidor/products/idProduct [requiere de un objeto con los datos del producto y el id del producto pasado por el query de la ruta] Ej: 
                 <br><code> 
-                {
-                    "name" :"ZANAHORIAS",
-                    "stock":1200,
-                    "price": 898989.56
-                }
+                {<br>
+                    "name" :"ZANAHORIAS",<br>
+                    "stock":1200,<br>
+                    "price": 898989.56<br>
+                }<br>
                 </code><br>
             </li>
             <li>DELETE:</li>
@@ -116,11 +115,11 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
             <li>servidor/products/verify [requiere de un array de objetos con el id del producto y la cantidad para verificar la            disponibilidad de los mismos] Ej: 
                 <br><code> 
                 {
-                    "name": "teddy",
-                    "last_name": "pottella",
-                    "email": "admin@admin.com",
-                    "dir_domicilio":"lugar de domicilio",
-                    "pass": "teddy7595"
+                    "name": "teddy", <br>
+                    "last_name": "pottella", <br>
+                    "email": "admin@admin.com", <br>
+                    "dir_domicilio":"lugar de domicilio", <br>
+                    "pass": "teddy7595" <br>
                 }
                 </code><br>
             </li>
@@ -130,20 +129,21 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
 </ul>
 
 # ---------------- INSTRUCCIONES ----------------
->Debido a que el workspace podría generar conflicto en un entorno nuevo se accedió a separar cada proyecto, es decir cada una contendrá su propio "node_modules" (para efectos prácticos por el pomento)
+>Debido a que el workspace podría generar conflicto en un entorno nuevo se accedió a separar cada proyecto, es decir cada una contendrá su propio "node_modules" (para efectos prácticos por el pomento) <br>
 
->Se recomienda instalar/instanciar/correr primero el backend
+>Se recomienda instalar/instanciar/correr primero el backend <br>
 
-<br>
 <h3>Backend:</h3><br>
 <ul>
     <li>1) Para iniciar el backend, nos posicionamos en las carpeta correspondiente a través de la consola y escribimos yarn install ó npm install en el caso de usar uno u otro</li>
-    <li>2) Al tener completado la instalación de paquetes, se procede a iniciar el proyecto usando el comando *yarn start:dev ó npm start:dev*</li>
+    <li>2) Al tener completado la instalación de paquetes, se procede a iniciar el proyecto usando el comando yarn start:dev ó npm start:dev</li>
     <li>3) *Se recomienda usar un solo gestor de paquetes bien sea yarn o nmp* </li>
     <li>4) Seguir los modelos de rutas planteados en el apartado de RUTAS </li>
 </ul>
 <br>
 <h3>Frontend:</h3><br>
 <ul>
-    <li></li>
+    <li>1) Para iniciar el frontend, nos posicionamos en las carpeta correspondiente a través de la consola y escribimos yarn install ó npm install en el caso de usar uno u otro</li>
+    <li>2) Al tener completado la instalación de paquetes, se procede a iniciar el proyecto usando el comando yarn dev ó npm dev</li>
+    <li>3) *Se recomienda usar un solo gestor de paquetes bien sea yarn o nmp* </li>
 </ul>
