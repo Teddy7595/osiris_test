@@ -175,7 +175,7 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
 </ul>
 
 # ---------------- INSTRUCCIONES ----------------
->Debido a que el workspace podría generar conflicto en un entorno nuevo se accedió a separar cada proyecto, es decir cada una contendrá su propio "node_modules" (para efectos prácticos por el pomento) <br>
+>Debido a que el workspace podría generar conflicto en un entorno nuevo se accedió a separar cada proyecto, es decir cada una contendrá su propio "node_modules" (para efectos prácticos por el momento) <br>
 
 >Se recomienda instalar/instanciar/correr primero el backend <br>
 
