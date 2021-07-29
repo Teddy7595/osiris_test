@@ -8,7 +8,8 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
 >NextJS (su última versión,  julio 2021)       <br>     
 >React (su última version,  julio 2021)        <br> 
 >TailwinCSS (su última versión,  julio 2021)   <br>         
->TypeScript (su última versión,  julio 2021)   <br>         
+>TypeScript (su última versión,  julio 2021)   <br>   
+>En la raíz del workspace se encuentra el archivo OSIRIS_BACKEND.json que es el manifiesto de las rutas exportadas desde el programa "insomnia" <br>      
 
 # ---------------- Estructura del backend ----------------
 <ul>
