@@ -183,7 +183,7 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
 <h3>Backend:</h3><br>
 <ul>
     <li>1) Para iniciar el backend, nos posicionamos en las carpeta correspondiente a través de la consola y escribimos yarn install ó npm install en el caso de usar uno u otro</li>
-    <li>2) Al tener completado la instalación de paquetes, se procede a iniciar el proyecto usando el comando yarn start:dev ó npm start:dev</li>
+    <li>2) Al tener completado la instalación de paquetes, se procede a iniciar el proyecto usando el comando yarn start:dev ó npm run start:dev</li>
     <li>3) *Se recomienda usar un solo gestor de paquetes bien sea yarn o nmp* </li>
     <li>4) Seguir los modelos de rutas planteados en el apartado de RUTAS </li>
 </ul>
@@ -191,6 +191,6 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
 <h3>Frontend:</h3><br>
 <ul>
     <li>1) Para iniciar el frontend, nos posicionamos en las carpeta correspondiente a través de la consola y escribimos yarn install ó npm install en el caso de usar uno u otro</li>
-    <li>2) Al tener completado la instalación de paquetes, se procede a iniciar el proyecto usando el comando yarn dev ó npm dev</li>
+    <li>2) Al tener completado la instalación de paquetes, se procede a iniciar el proyecto usando el comando yarn dev ó npm run dev</li>
     <li>3) *Se recomienda usar un solo gestor de paquetes bien sea yarn o nmp* </li>
 </ul>
