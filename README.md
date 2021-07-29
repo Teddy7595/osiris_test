@@ -33,15 +33,15 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
 <br>
 <ul>
     <li>Todas las rutas tendrán una interfaz de respuesta compuestas por : <br><code>
-        responseInterface 
-        {
-            ok             //determina si la operación fue o no exitosa
-            status         //devuelve el codigo de respuesta de la API
-            data           //devuelve la data o vacio de ser exitoso o no la petición
-            message        //retorna el mensaje de respuesta de la API
-            paginator      //retorna el estatus de la paginación del servicio
-            err            //en caso de ocurrir algún error grave, dicha variable contendrá el mensaje con detalles del problema
-        }
+        responseInterface<br> 
+        {<br>
+            ok             //determina si la operación fue o no exitosa<br>
+            status         //devuelve el codigo de respuesta de la API<br>
+            data           //devuelve la data o vacio de ser exitoso o no la petición<br>
+            message        //retorna el mensaje de respuesta de la API<br>
+            paginator      //retorna el estatus de la paginación del servicio<br>
+            err            //en caso de ocurrir algún error grave, dicha variable contendrá el mensaje con detalles del problema<br>
+        }<br>
     </code><br></li>
     <li>La mayoria de las rutas necesitan un autenticación ó token para poder gozar de las funciones de cada servicio</li>
     <li>Para poder obtener el token solo necesita registrarse e iniciar sesión</li>
