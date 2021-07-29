@@ -29,7 +29,7 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
 <p> En esta se intento recrear un poco la misma arquitectura del back, pero más simple; mantenindo la consistencia de ciertos tipos de datos manejados en el backend </p>
 
 # ---------------- Rutas de la API ----------------
->Antes de continuar, se recomienta usar los formatos de petició mostrados ya que estos se basan en las interfaces y DTOs que componen la API
+>Antes de continuar, se recomienta usar los formatos de petición mostrados ya que estos se basan en las interfaces y DTOs que componen la API
 <br>
 <ul>
     <li>Todas las rutas tendrán una interfaz de respuesta compuestas por : <br>
