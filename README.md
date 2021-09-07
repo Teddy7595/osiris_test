@@ -1,13 +1,8 @@
 <h2 align="center">Acerca de la esturcutra el proyecto </h2>
-<p align="center">Aclaratoria: por motivos prácticos y evitar futuros errores en la entrega del proyecto 
-decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
 
 ## ---------------- Tecnologías usadas en el proyecto ---------------- 
 >NestJS (su última versión, julio 2021)        <br>     
->MongoDB (su última version, julio 2021)       <br>     
->NextJS (su última versión,  julio 2021)       <br>     
->React (su última version,  julio 2021)        <br> 
->TailwinCSS (su última versión,  julio 2021)   <br>         
+>MongoDB (su última version, julio 2021)       <br>          
 >TypeScript (su última versión,  julio 2021)   <br>   
 >En la raíz del workspace se encuentra el archivo OSIRIS_BACKEND.json que es el manifiesto de las rutas exportadas desde el programa "insomnia" <br>      
 
@@ -25,9 +20,6 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
     <li>La carpeta guards se encarga de establecer las funciones de protección de rutas y estas solo manejan valores booleanos</li>
     <li>La carpeta middleware contiene todos los middleware que prestan servicio en 2do plano al backend, tal como la paginación y cualquier otro servicio requerido mediante el request</li>
 </ul>
-
-# ---------------- Estructura del frontend ----------------
-<p> En esta se intento recrear un poco la misma arquitectura del back, pero más simple; mantenindo la consistencia de ciertos tipos de datos manejados en el backend </p>
 
 # ---------------- Rutas de la API ----------------
 >Antes de continuar, se recomienta usar los formatos de petición mostrados ya que estos se basan en las interfaces y DTOs que componen la API
@@ -176,9 +168,6 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
 </ul>
 
 # ---------------- INSTRUCCIONES ----------------
->Debido a que el workspace podría generar conflicto en un entorno nuevo se accedió a separar cada proyecto, es decir cada una contendrá su propio "node_modules" (para efectos prácticos por el momento) <br>
-
->Se recomienda instalar/instanciar/correr primero el backend <br>
 
 <h3>Backend:</h3><br>
 <ul>
@@ -188,9 +177,3 @@ decidí disolver el workspace y hacer cada carpeta un proyecto individual</p>
     <li>4) Seguir los modelos de rutas planteados en el apartado de RUTAS </li>
 </ul>
 <br>
-<h3>Frontend:</h3><br>
-<ul>
-    <li>1) Para iniciar el frontend, nos posicionamos en las carpeta correspondiente a través de la consola y escribimos yarn install ó npm install en el caso de usar uno u otro</li>
-    <li>2) Al tener completado la instalación de paquetes, se procede a iniciar el proyecto usando el comando yarn dev ó npm run dev</li>
-    <li>3) *Se recomienda usar un solo gestor de paquetes bien sea yarn o nmp* </li>
-</ul>
